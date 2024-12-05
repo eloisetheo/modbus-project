@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion Automate Modbus</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Connexion à l'Automate Modbus</h1>
+
+      <!-- Formulaire pour entrer l'adresse IP, l'adresse du registre et le nom de la variable -->
+      <form id="modbusForm">
+        <label for="ipAddress">Adresse IP de l'automate :</label>
+        <input
+          type="text"
+          id="ipAddress"
+          placeholder="Ex : 172.16.1.24"
+          required
+        />
+
+        <label for="registerAddress">Adresse de la variable :</label>
+        <input
+          type="number"
+          id="registerAddress"
+          placeholder="Ex : 602"
+          required
+        />
+
+        <label for="variableName">Nom de la variable :</label>
+        <input
+          type="text"
+          id="variableName"
+          placeholder="Ex : Température"
+          required
+        />
+
+        <button type="submit">Récupérer les données</button>
+      </form>
+
+      <h2>Variables en stock</h2>
+      <table id="variablesTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Adresse IP</th>
+            <th>Adresse du registre</th>
+            <th>Fréquence</th>
+            <th>Unité</th>
+            <th>Dernière lecture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Les variables seront insérées ici -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // Fonction pour charger les variables depuis la base de données
+      async function loadVariables() {
+        try {
+          const response = await fetch("http://localhost:3001/get-variables");
+          const data = await response.json();
+
+          console.log("Données reçues depuis l'API :", data); // Ajoute un log pour vérifier les données
+
+          if (response.ok) {
+            const tableBody = document
+              .getElementById("variablesTable")
+              .getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Réinitialiser le tableau avant d'ajouter les nouvelles données
+
+            data.forEach((variable) => {
+              const row = document.createElement("tr");
+
+              row.innerHTML = `
+                  <td>${variable.id}</td>
+                  <td>${variable.name}</td>
+                  <td>${variable.ip_address}</td>
+                  <td>${variable.register}</td>
+                  <td>${variable.frequency}</td>
+                  <td>${variable.unit}</td>
+                  <td>${variable.last_reading}</td>
+                `;
+
+              tableBody.appendChild(row);
+            });
+          } else {
+            console.error(
+              "Erreur lors du chargement des variables :",
+              data.message
+            );
+          }
+        } catch (error) {
+          console.error("Erreur de connexion au serveur :", error);
+        }
+      }
+
+      // Appeler la fonction pour charger les variables lorsque la page se charge
+      loadVariables();
+    </script>
+  </body>
+</html>

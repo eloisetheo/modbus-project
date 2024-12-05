@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "cron.js",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "denque": "^2.1.0",
+    "express": "^4.21.1",
+    "iconv-lite": "^0.6.3",
+    "lru-cache": "^10.4.3",
+    "mariadb": "^3.4.0",
+    "modbus-serial": "^8.0.17",
+    "mysql2": "^3.11.5",
+    "node-cron": "^3.0.3",
+    "safer-buffer": "^2.1.2",
+    "undici-types": "^6.20.0",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
+}
