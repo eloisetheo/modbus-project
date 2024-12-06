@@ -1,16 +1,9 @@
-version: "3.8"
-
-services:
-  frontend:
-    build:
-      context: .
-    container_name: frontend-app
-    restart: always
-    ports:
-      - "8080:80"
-    networks:
-      - shared_network
-
-networks:
-  shared_network:
-    external: true
+frontend:
+  build:
+    context: ./frontend
+  container_name: frontend-app
+  ports:
+    - "8080:80" # Servir l'interface sur le port 8080
+  depends_on:
+    - backend
+  restart: always

@@ -1,0 +1,20 @@
+{
+  "name": "deploiementdunsi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "modbus-serial": "^8.0.17",
+    "mysql2": "^3.11.5",
+    "object-assign": "^4.1.1",
+    "vary": "^1.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

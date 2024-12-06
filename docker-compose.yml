@@ -1,12 +1,10 @@
-version: "3.8"
-
 services:
   backend:
     build:
       context: ./backend
     container_name: backend-app
     ports:
-      - "3000:3000" # Changez le port selon les besoins
+      - "3001:3001" # Changez le port selon les besoins
     depends_on:
       - mariadb
     environment:

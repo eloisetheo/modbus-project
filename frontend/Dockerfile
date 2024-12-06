@@ -1,28 +1,11 @@
-# Étape 1 : Construire l'application React/Vue/Angular (ou autre)
-FROM node:16 as build
+# Utiliser l'image Nginx pour servir les fichiers statiques
+FROM nginx:latest
 
-WORKDIR /app
-
-# Copier les fichiers `package.json` et `package-lock.json` depuis le dossier parent
-COPY ../package.json ../package-lock.json ./
-
-# Installer les dépendances
-RUN npm install
-
-# Copier le reste des fichiers
-COPY . .
-
-# Construire l'application
-RUN npm run build
-
-# Étape 2 : Servir l'application avec un serveur web léger
-FROM nginx:alpine
-
-# Copier les fichiers construits dans le dossier de Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Copier les fichiers HTML/CSS/JS dans le dossier par défaut de Nginx
+COPY . /usr/share/nginx/html
 
 # Exposer le port 80
 EXPOSE 80
 
-# Commande de démarrage
+# Commande par défaut pour démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
