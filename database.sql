@@ -30,15 +30,12 @@ CREATE TABLE IF NOT EXISTS `logs` (
 
 -- Listage de la structure de la table database. readings
 CREATE TABLE IF NOT EXISTS `readings` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `variable_id` int(11) DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
-  `timestamp` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- Listage des données de la table database.readings : ~0 rows (environ)
-INSERT INTO `readings` (`id`, `variable_id`, `value`, `timestamp`) VALUES
-	(NULL, 1, 0, 1733325673);
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Listage de la structure de la table database. users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -58,17 +55,14 @@ CREATE TABLE IF NOT EXISTS `variables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `ip_address` varchar(15) NOT NULL,
-  `register` int(11) DEFAULT NULL,
-  `frequency` int(11) DEFAULT NULL,
-  `unit` int(11) DEFAULT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  `value` int(11) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- Listage des données de la table database.variables : ~0 rows (environ)
+  `register` int(11) NOT NULL,
+  `frequency` int(11) NOT NULL,
+  `unit` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=318 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
