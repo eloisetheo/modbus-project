@@ -1,4 +1,4 @@
-Déploiement d'un Système d'Informations (DeploiementdunSI)
+# Déploiement d'un Système d'Informations
     📋 Description du Projet
         Ce projet permet de récupérer des variables d’un automate via le protocole Modbus Serial sur un réseau local, de les stocker dans une base de données, et de les afficher sur une interface web. Il a été conçu pour permettre aux utilisateurs de configurer et superviser facilement les données collectées depuis les automates.
 ________________________________________
